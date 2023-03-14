@@ -2,12 +2,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { MovieDetails } from './page';
 
-// type MovieDetails = {
-//   id: string;
-//   title: string;
-//   poster_path: string;
-//   release_date: string;
-// };
 
 export default function Movie({
   id,
