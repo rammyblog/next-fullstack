@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Button } from '../components/Button';
-import BackButton from '../components/BackButton';
+// import BackButton from '../components/BackButton';
 
 type GenreType = {
   id: number;
@@ -23,7 +23,7 @@ export default async function MovieDetail({
   const imagePath = `https://image.tmdb.org/t/p/original`;
   return (
     <>
-      <BackButton />
+      {/* <BackButton /> */}
       <div className="flex-none md:flex lg:flex-row sm:flex-col">
         <Image
           className="basis-1/4 mr-10"

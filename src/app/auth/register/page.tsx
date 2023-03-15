@@ -1,20 +1,12 @@
 'use client';
-import React from 'react';
 
-import { z } from 'zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-const formSchema = z.object({
-  name: z.string().min(1, 'name is required').max(100),
-  email: z.string().email('Invalid email').min(1, 'Email is required'),
-  password: z
-    .string()
-    .min(1, 'Password is required')
-    .min(4, 'Password must have more than 4 characters'),
-});
-
-type FormSchemaType = z.infer<typeof formSchema>;
+import axios from 'axios';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import {
+  RegisterSchemaType,
+  registerSchema,
+} from '../../../../schema/user.schema';
 
 interface Props {}
 
@@ -23,12 +15,18 @@ const Register = (props: Props) => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormSchemaType>({
-    resolver: zodResolver(formSchema),
+  } = useForm<RegisterSchemaType>({
+    resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<RegisterSchemaType> = async (userData) => {
+    try {
+      const { data, status } = await axios.post('/api/register', userData);
+      //   redirect to login page
+      console.log(data, status);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
